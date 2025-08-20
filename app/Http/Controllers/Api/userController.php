@@ -2,20 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UserModel;
 use Illuminate\Support\Facades\Request;
-use App\Traits\TraitName;
+use Illuminate\Support\Facades\Hash;
 
-abstract class UserController
+class UserController extends Controller
 {
+    public function store(Request $request) {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|unique:users',
+            'password' => 'required|string|min:6',
+        ]);
 
-    use TraitName;
+        $user = UserModel::create([
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'password' => Hash::make($validated['password']),
+        ]);
 
-   public function foo(){
-     $this->TritName($parms);
-   }
-
-    function store(Request $request) {
-        $credentials = $request->only('name', 'email', 'password');
+        return response()->json([
+            'message' => 'User created successfully',
+            'user' => $user
+        ], 201);
         dd($credentials);
     }
 }

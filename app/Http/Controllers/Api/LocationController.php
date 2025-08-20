@@ -17,4 +17,26 @@ class LocationController extends Controller
     {
         return LocationModel::create($request->all());
     }
+
+    public function send_location(Request $request) {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'latitude' => 'required',
+            'longitude' => 'required',
+            'radius_m' => 'required',
+        ]);
+
+        $lokasi = LocationModel::create([
+            'name' => $validated['name'],
+            'latitude' => $validated['latitude'],
+            'longitude' => $validated['longitude'],
+            'radius_m' => $validated['radius_m'],
+        ]);
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'User created successfully',
+            'lokasi' => $lokasi
+        ], 201);
+    }
 }

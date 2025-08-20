@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AttendaceController;
 use App\Http\Controllers\Api\LocationController;
 use App\Http\Controllers\Api\PredictionController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\UserController;
@@ -13,7 +14,11 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::post('user/login', [UserController::class, 'store'])->name('login');
+Route::post('user/regist', [AuthController::class, 'regist'])->name('regist');
+Route::post('user/login', [AuthController::class, 'login'])->name('login');
+
+// Lokasi
+Route::post('location/add', [LocationController::class, 'send_location'])->name('send_location');
 
 Route::post('attendances', [AttendaceController::class, 'index']);
 Route::post('locations', [LocationController::class, 'index']);
