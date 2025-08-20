@@ -8,6 +8,9 @@ use App\Models\LocationModel;
 use App\Models\ShiftModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use App\Services\TelegramService;
+
 
 class AttendaceController extends Controller
 {
@@ -83,5 +86,30 @@ class AttendaceController extends Controller
 
         $c = 2 * atan2(sqrt($a), sqrt(1-$a));
         return $earthRadius * $c; // distance in meters
+    }
+    
+
+    // public function sendTelegram($message)
+    // {
+    //     $token = "8281406334:AAGBnu-1M7l8fkTbpDxaHS_bgyCoavMd7Jc";
+    //     $chatId = "YOUR_CHAT_ID";
+
+    //     Http::get("https://api.telegram.org/bot{$token}/sendMessage", [
+    //         'chat_id' => $chatId,
+    //         'text' => $message
+    //     ]);
+    //     // TelegramService::sendMessage("✅ Absensi baru masuk: " . now()->format('d-m-Y H:i'));
+    // }
+
+    public static function sendMessage(string $message)
+    {
+        $token   = config('services.telegram.bot_token');
+        $chat_id = config('services.telegram.chat_id');
+
+        return Http::post("https://api.telegram.org/bot{$token}/sendMessage", [
+            'chat_id' => $chat_id,
+            'text'    => $message,
+            'parse_mode' => 'Markdown', // opsional, biar bisa bold/italic
+        ]);
     }
 }

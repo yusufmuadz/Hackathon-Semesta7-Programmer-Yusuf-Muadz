@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('attendance_models', function (Blueprint $table) {
+        Schema::create('qrcodes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('location_id')->constrained()->onDelete('cascade');
+            $table->foreignId('shift_id')->constrained()->onDelete('cascade');
+            $table->string('code')->unique(); // hash unik QR
+            $table->dateTime('expires_at');   // expired per jam
             $table->timestamps();
         });
     }
@@ -22,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('attendance_models');
+        Schema::dropIfExists('qr_code');
     }
 };
