@@ -1,6 +1,5 @@
 
 
-import 'package:e_learning/controller/splash_controller.dart';
 import 'package:e_learning/widget/auth/login.dart';
 import 'package:e_learning/widget/home/beranda.dart';
 import 'package:flutter/material.dart';

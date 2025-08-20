@@ -52,3 +52,7 @@ Ambil Foto Selfie: verifikasi absensi.
 Lihat Riwayat Absensi: user bisa cek absensi harian.
 
 Admin: menampilkan data absensi, buka lokasi di Google Maps, generate laporan mingguan.
+
+
+
+Hanya bisa untuk android
