@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "fb42cb34-c9ce-4145-b9b0-ad79b355ca93",
+		"name": "SEVIMA",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Attendance",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{LOCAL_API}}/api/attendances",
+					"host": [
+						"{{LOCAL_API}}"
+					],
+					"path": [
+						"api",
+						"attendances"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Telegram Notif",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "message",
+							"value": "halo",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{LOCAL_API}}/api/sendNotif",
+					"host": [
+						"{{LOCAL_API}}"
+					],
+					"path": [
+						"api",
+						"sendNotif"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Report Weekly",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{LOCAL_API}}/api/report/weekly",
+					"host": [
+						"{{LOCAL_API}}"
+					],
+					"path": [
+						"api",
+						"report",
+						"weekly"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "halo",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "ha@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "admin",
+							"description": "Admin, Guard",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{LOCAL_API}}/api/user/login",
+					"host": [
+						"{{LOCAL_API}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "halo",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "ha@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "admin",
+							"description": "Admin, Guard",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{LOCAL_API}}/api/user/login",
+					"host": [
+						"{{LOCAL_API}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Location add",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "halo",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "ha@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "12345678",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "admin",
+							"description": "Admin, Guard",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{LOCAL_API}}/api/user/login",
+					"host": [
+						"{{LOCAL_API}}"
+					],
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "LOCAL_API",
+			"value": "http://192.168.68.239:8000"
+		}
+	]
+}
