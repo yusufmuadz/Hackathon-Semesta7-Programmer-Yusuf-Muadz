@@ -1,9 +1,13 @@
 
+import 'dart:convert';
+
 import 'package:e_learning/widget/auth/regist.dart';
 import 'package:e_learning/widget/home/beranda.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../service/api_service.dart';
 
 class LoginWidget extends StatefulWidget {
   const LoginWidget({super.key});
@@ -14,19 +18,38 @@ class LoginWidget extends StatefulWidget {
 
 class _LoginWidgetState extends State<LoginWidget> {
 
+  bool obscureText = true;
   TextEditingController emailController = TextEditingController(), passwordController = TextEditingController();
 
   setLogin() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-    setState(() {
-      prefs.setString('masuk', 'true');
-      prefs.setString('login', 'true');
-    });
+    var data = {
+      'email': emailController.text,
+      'password': passwordController.text,
+    };
 
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => HomeWidget())
-    );
+    var send = await ApiService().dataUrl(data, 'user/login');
+    var body = json.decode(send.body);
+
+    print(data);
+
+    if (body['status'] == 'success') {
+      setState(() {
+        prefs.setString('masuk', 'true');
+        prefs.setString('login', 'true');
+        prefs.setString('username', body['data']['name']);
+        prefs.setString('role', body['data']['role']);
+      });
+
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (context) => HomeWidget())
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(body['message']))
+      );
+    }
   }
 
   @override
@@ -50,9 +73,24 @@ class _LoginWidgetState extends State<LoginWidget> {
             SizedBox(height: 10),
             TextField(
               controller: passwordController,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
+              obscureText: obscureText,
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
                 labelText: 'Password',
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    obscureText
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                    color: Colors.grey,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      obscureText =
+                          !obscureText;
+                    });
+                  },
+                ),
               ),
             ),
             SizedBox(height: 30),
