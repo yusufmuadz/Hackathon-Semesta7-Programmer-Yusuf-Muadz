@@ -6,18 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
     public function up(): void {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('locations', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->string('email', 100)->unique()->nullable();
-            $table->string('password');
-            $table->enum('role', ['admin', 'guard'])->default('guard');
-            $table->string('photo_url')->nullable();
+            $table->decimal('latitude', 10, 8);
+            $table->decimal('longitude', 11, 8);
+            $table->integer('radius_m')->default(30);
             $table->timestamps();
         });
     }
 
     public function down(): void {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('locations');
     }
 };
